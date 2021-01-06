@@ -21,7 +21,7 @@ export function getEntries(latexSource: string, databases: Databases): Promise<s
             let entries = latex.stdout.toString()
                 .split("\n")
                 .filter(line => line.match(/Citation/))
-                .map(line => line.match(/`(.*)'/)?.[1])
+                .map(line => line.match(/[`'](.*)'/)?.[1])
                 .filter(entry => entry?.match(dbExpr))
                 .filter((e): e is string => e != null);
             entries = [...new Set(entries)];
